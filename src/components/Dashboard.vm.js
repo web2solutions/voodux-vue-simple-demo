@@ -24,7 +24,7 @@ export default {
     console.log(this.$foundation)
   },
   beforeDestroy () {
-    console.log('===============>>>>>>>>>>>>>>>')
+    
   },
   methods: {}
 }

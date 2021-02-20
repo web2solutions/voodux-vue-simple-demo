@@ -52,7 +52,7 @@ export default {
 
   },
   beforeDestroy() {
-    console.log('===============>>>>>>>>>>>>>>>')
+    
 
     const { Order } = this.$foundation.data
     Order.stopListenTo(this.onAddDocHandlerListener)

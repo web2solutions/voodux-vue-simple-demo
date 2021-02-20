@@ -61,7 +61,7 @@ export default {
 
   },
   beforeDestroy() {
-    console.log('===============>>>>>>>>>>>>>>>')
+    
     const {
       Order
     } = this.$foundation.data

@@ -61,7 +61,8 @@ export default {
     console.log(this.$foundation)
     console.log(this.name)
   },
-  beforeUnmount () {
+  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
+  beforeDestroy () {
     
   },
   methods: {}

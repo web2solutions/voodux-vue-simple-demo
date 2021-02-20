@@ -80,7 +80,8 @@ export default {
     }
     
   },
-  beforeUnmount () {
+  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
+  beforeDestroy () {
     const { Order } = this.$foundation.data
     Order.stopListenTo(this.onAddDocHandlerListener)
     Order.stopListenTo(this.onEditDocHandlerListener)

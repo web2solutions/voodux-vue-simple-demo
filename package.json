@@ -14,7 +14,7 @@
     "moment": "^2.29.1",
     "sweetalert": "^2.1.2",
     "voodux": "0.0.11",
-    "vue": "^2.6.9",
+    "vue": "^2.6.11",
     "vue-router": "^3.5.1"
   },
   "devDependencies": {
