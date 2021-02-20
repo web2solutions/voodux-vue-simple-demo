@@ -21,8 +21,8 @@ export default {
       const docs = [...d]
       // // console.log(docs)
       let total = 0
-      const values = docs.reverse().splice(0, 30).map(doc => (total = total + doc.amount))
-      const labels = docs.reverse().splice(0, 30).map(doc => (moment(doc.date).format('LTS')))
+      const values = docs.reverse().map(doc => (total = total + doc.amount))
+      const labels = docs.reverse().map(doc => (moment(doc.date).format('LTS')))
       this.$set(this, 'depositsChartValues', values)
       this.$set(this, 'depositsChartLabels', labels)
       this.updateChart({
