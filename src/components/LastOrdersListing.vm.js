@@ -2,7 +2,7 @@
 
 
 export default {
-  name: 'TopNavigation',
+  name: 'LastOrdersListing',
   components: {
 
   },

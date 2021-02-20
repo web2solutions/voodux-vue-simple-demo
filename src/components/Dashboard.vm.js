@@ -1,10 +1,12 @@
 /* globals */
 import DepositsChart from './DepositsChart.vue'
+import LastOrdersListing from './LastOrdersListing.vue'
 
 export default {
   name: 'Dashboard',
   components: {
-    DepositsChart
+    DepositsChart,
+    LastOrdersListing
   },
   props: {
 
@@ -13,6 +15,9 @@ export default {
     
   }),
   mounted () {
+    
+  },
+  beforeUnmount () {
     
   },
   methods: {}

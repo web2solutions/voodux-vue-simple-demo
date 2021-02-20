@@ -15,5 +15,8 @@ export default {
   mounted () {
     
   },
+  beforeUnmount () {
+    
+  },
   methods: {}
 }

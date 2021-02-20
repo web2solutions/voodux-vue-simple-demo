@@ -53,5 +53,8 @@ export default {
       }
     })
   },
+  beforeUnmount () {
+    
+  },
   methods: {}
 }
