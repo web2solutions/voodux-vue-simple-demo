@@ -6,28 +6,24 @@
     <div class="sidebar-sticky pt-3">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">
-            <span data-feather="home"></span>
-            Dashboard <span class="sr-only">(current)</span>
-          </a>
+          <router-link  class="nav-link active" to="/" active-class="nav-link active">
+            <span data-feather="home"></span> Dashboard
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span data-feather="file"></span>
-            Orders
-          </a>
+          <router-link  class="nav-link active" to="/Orders" active-class="nav-link active">
+            <span data-feather="home"></span> Orders
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span data-feather="shopping-cart"></span>
-            Products
-          </a>
+          <router-link  class="nav-link active" to="/Products" active-class="nav-link active">
+            <span data-feather="home"></span> Products
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span data-feather="users"></span>
-            Customers
-          </a>
+          <router-link  class="nav-link active" to="/Customers" active-class="nav-link active">
+            <span data-feather="home"></span> Customers
+          </router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">

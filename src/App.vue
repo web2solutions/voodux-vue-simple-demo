@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="row">
         <Navigation></Navigation>
-        <Dashboard></Dashboard>
+        <router-view></router-view>
+        <!-- <Dashboard></Dashboard> -->
       </div>
     </div>
   </div>
@@ -12,15 +13,14 @@
 
 <script>
 import TopNavigation from './components/TopNavigation.vue'
-import Dashboard from './components/Dashboard.vue'
 import Navigation from './components/Navigation.vue'
 
 export default {
   name: 'App',
   components: {
     TopNavigation,
-    Navigation,
-    Dashboard
+    Navigation// ,
+    // Dashboard
   }
 }
 </script>
@@ -29,6 +29,7 @@ export default {
 body {
   font-size: .875rem;
 }
+
 
 .feather {
   width: 16px;
@@ -43,7 +44,11 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
+  /* rtl:raw:
+  right: 0;
+  */
   bottom: 0;
+  /* rtl:remove */
   left: 0;
   z-index: 100; /* Behind the navbar */
   padding: 48px 0 0; /* Height of navbar */
@@ -65,13 +70,6 @@ body {
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
@@ -79,7 +77,7 @@ body {
 
 .sidebar .nav-link .feather {
   margin-right: 4px;
-  color: #999;
+  color: #727272;
 }
 
 .sidebar .nav-link.active {
@@ -129,4 +127,24 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+
+.main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* rtl:remove */
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  overflow-y: scroll;
+  height: auto;
+}
+
+
+.needs-validation{
+  overflow: hidden;
+}
+
 </style>

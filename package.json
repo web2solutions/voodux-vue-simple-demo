@@ -11,8 +11,11 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
+    "sweetalert": "^2.1.2",
     "voodux": "0.0.11",
-    "vue": "^2.6.9"
+    "vue": "^2.6.9",
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

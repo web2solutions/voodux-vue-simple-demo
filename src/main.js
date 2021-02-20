@@ -1,4 +1,8 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+
+
 
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -19,6 +23,8 @@ import onWorkerResponseClientId from './data/events/onWorkerResponseClientId'
   
 // import Vue App
 import App from './App.vue'
+  
+// import components
 
 
 ;(async () => {
@@ -34,19 +40,17 @@ import App from './App.vue'
     }
   })
 
-  // binds foundation as scope to main application event listeners
-  onApplicationStart = onApplicationStart.bind(foundation)
-  onWorkerResponseClientId = onWorkerResponseClientId.bind(foundation)
+  
 
   // listen to foundation start event and attach a handler
   const appStartListener = foundation.on(
     'foundation:start',
-    onApplicationStart
+    onApplicationStart.bind(foundation) // binds foundation as scope to main application event listeners
   )
   // listen to worker responseClientId event and attach a handler
   const workerSendClientIdListener = foundation.on(
     'worker:responseClientId',
-    onWorkerResponseClientId
+    onWorkerResponseClientId.bind(foundation) // binds foundation as scope to main application event listeners
   )
 
   // destroy main voodux event listeners before window unload
@@ -61,14 +65,29 @@ import App from './App.vue'
     throw new Error(`Error starting foundation stack: ${start.error}`)
   }
 
+  
+
+  Vue.use(VueRouter)
+
   // let's use BoostrapVue 
   Vue.use(BootstrapVue)
   
   // adds voodux foundation to vue prototype then we can easily use it inside components
   Vue.prototype.$foundation = foundation
+
+  const routes = [
+    { path: '/', component: () => import('./components/Dashboard.vue') },
+    { path: '/Customers', component: () => import('./components/Customers/index.vue') },
+    { path: '/Orders', component: () => import('./components/Orders/index.vue') },
+  ]
+
+  const router = new VueRouter({
+    routes // short for `routes: routes`
+  })
   
   new Vue({
     el: '#app',
+    router,
     render: h => h(App)
   })
 
