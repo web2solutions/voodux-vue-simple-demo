@@ -41,13 +41,13 @@ export default {
     this.onEditDocHandlerListener = Order.on('edit', this.onEditDocHandler)
     this.onDeleteDocHandlerListener = Order.on('delete', this.onDeleteDocHandler)
 
-    const findOrders = await Order.findAll({})
+    const findOrders = await Order.find({})
     if (findOrders.error) {
       return
     }
     if (findOrders.data) {
       // console.log(findOrders.data)
-      this.$set(this, 'documents', findOrders.data)
+      this.$set(this, 'documents', findOrders.data.reverse())
     }
 
   },
@@ -117,7 +117,8 @@ export default {
       if (error) {
         return
       }
-      this.documents.unshift(data)
+      // this.documents.splice(this.documents.length - 1, 1)
+      this.documents.push(data)
     },
     onEditDocHandler (eventObj) {
       const { /* error, document, foundation, */data } = eventObj
