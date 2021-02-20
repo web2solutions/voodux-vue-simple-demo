@@ -22,7 +22,15 @@
         </button>
       </div>
     </div>
-    <DepositsChart></DepositsChart>
+    
+    <div class="row">
+      <div class="col col-md-8">
+        <DepositsChart></DepositsChart>
+      </div>
+      <div class="col col-md-4">
+        <DepositsChartBar></DepositsChartBar>
+      </div>
+    </div>
     <h2>Last Orders</h2>
     <LastOrdersListing></LastOrdersListing>
   </main>

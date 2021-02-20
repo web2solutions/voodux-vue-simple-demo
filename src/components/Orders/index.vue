@@ -107,11 +107,21 @@ export default {
     onEditDocHandler (eventObj) {
       const { error, document, foundation, data } = eventObj
       console.log({ error, document, foundation, data })
+      this.documents.forEach((doc, index) => {
+        if (doc.__id === data.__id){
+          this.$set(this.documents, index, data)
+        }
+      });
     },
     onDeleteDocHandler (eventObj) {
       const { error, document, foundation, data } = eventObj
       console.log({ error, document, foundation, data })
-    },
+      this.documents.forEach((doc, index) => {
+        if (doc.__id === data.__id){
+          this.documents.splice(index, 1)
+        }
+      });
+    }
   }
 }
 
