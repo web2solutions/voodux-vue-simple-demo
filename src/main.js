@@ -34,15 +34,19 @@ import App from './App.vue'
     }
   })
 
+  // binds foundation as scope to main application event listeners
+  onApplicationStart = onApplicationStart.bind(foundation)
+  onWorkerResponseClientId = onWorkerResponseClientId.bind(foundation)
+
   // listen to foundation start event and attach a handler
   const appStartListener = foundation.on(
     'foundation:start',
-    onApplicationStart.bind(foundation)
+    onApplicationStart
   )
   // listen to worker responseClientId event and attach a handler
   const workerSendClientIdListener = foundation.on(
     'worker:responseClientId',
-    onWorkerResponseClientId.bind(foundation)
+    onWorkerResponseClientId
   )
 
   // destroy main voodux event listeners before window unload
