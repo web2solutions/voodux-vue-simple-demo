@@ -24,7 +24,9 @@ export default {
 
     await this.count()
   },
-  beforeUnmount () {
+  beforeDestroy() {
+    console.log('===============>>>>>>>>>>>>>>>')
+
     const { Order } = this.$foundation.data
     Order.stopListenTo(this.onAddDocHandlerListener)
     Order.stopListenTo(this.onEditDocHandlerListener)

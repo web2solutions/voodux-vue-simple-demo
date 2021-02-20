@@ -23,8 +23,8 @@ export default {
   mounted () {
     console.log(this.$foundation)
   },
-  beforeUnmount () {
-    
+  beforeDestroy () {
+    console.log('===============>>>>>>>>>>>>>>>')
   },
   methods: {}
 }

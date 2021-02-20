@@ -31,7 +31,8 @@ export default {
       this.$set(this, 'documents', findOrders.data)
     }
   },
-  beforeUnmount () {
+  beforeDestroy() {
+    console.log('===============>>>>>>>>>>>>>>>')
     const { Order } = this.$foundation.data
     Order.stopListenTo(this.onAddDocHandlerListener)
     Order.stopListenTo(this.onEditDocHandlerListener)

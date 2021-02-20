@@ -15,7 +15,7 @@ export default {
   mounted () {
     
   },
-  beforeUnmount () {
+  beforeDestroy () {
     
   },
   methods: {}

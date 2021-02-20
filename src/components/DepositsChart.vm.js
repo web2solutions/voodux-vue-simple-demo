@@ -51,7 +51,9 @@ export default {
     }
 
   },
-  beforeUnmount () {
+  beforeDestroy() {
+    console.log('===============>>>>>>>>>>>>>>>')
+
     const { Order } = this.$foundation.data
     Order.stopListenTo(this.onAddDocHandlerListener)
     Order.stopListenTo(this.onEditDocHandlerListener)

@@ -26,7 +26,7 @@ export default {
       labels.forEach((name, index) => {
         const defaultAmount = 0
         vals[index] = docs.filter(doc => (doc.name === name)).map(doc => (doc.amount)).reduce((p, v) => {
-          console.log(p, v)
+          // console.log(p, v)
           return (p + v)
         }, defaultAmount)
       })
@@ -60,7 +60,8 @@ export default {
     }
 
   },
-  beforeUnmount() {
+  beforeDestroy() {
+    console.log('===============>>>>>>>>>>>>>>>')
     const {
       Order
     } = this.$foundation.data
