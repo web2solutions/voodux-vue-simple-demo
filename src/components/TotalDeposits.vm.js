@@ -6,14 +6,21 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 
 export default {
-  name: 'LastOrdersListing',
+  name: 'TotalDeposits',
   props: {
     msg: String
   },
   data: () => ({
-    documents: []
+      documents: [],
+      total: 0,
   }),
-
+    watch: {
+        documents: function (d) {
+            this.total = formatter.format(d.map(doc => (doc.amount)).reduce((p, v) => {
+                return (p + v)
+            }, 0))
+        }
+    },
   async mounted () {
     const { Order } = this.$foundation.data
     

@@ -41,7 +41,7 @@ export default {
     this.onEditDocHandlerListener = Order.on('edit', this.onEditDocHandler)
     this.onDeleteDocHandlerListener = Order.on('delete', this.onDeleteDocHandler)
 
-    const findOrders = await Order.find({})
+    const findOrders = await Order.findAll({})
     if (findOrders.error) {
       return
     }

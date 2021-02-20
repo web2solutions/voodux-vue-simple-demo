@@ -28,6 +28,7 @@ export default {
 <style>
 body {
   font-size: .875rem;
+  color: rgb(49, 49, 117);
 }
 
 
