@@ -1,6 +1,6 @@
 # voodux-vue-simple-demo
 
-`Check the the [online demo](https://voodux-vue-simple-demo-web2solutions.vercel.app/)` 
+`Check the the ` [online demo](https://voodux-vue-simple-demo-web2solutions.vercel.app/)
 
 ## Project setup
 ```
