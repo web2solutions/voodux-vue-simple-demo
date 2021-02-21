@@ -17,7 +17,11 @@ export default {
   }),
   watch: {
     documents: function (d) {
-      const docs = [...d]
+      let docs = [...d]
+      if (d.length > 30) {
+        // docs = d.splice().split(d.length - 1 - 30, 30)
+      }
+      
       // console.log(docs)
       // let total = 0
       // const values = docs.reverse().map(doc => (total = total + doc.amount))
@@ -55,13 +59,13 @@ export default {
       return
     }
     if (findOrders.data) {
-      console.log(findOrders.data)
+      // console.log(findOrders.data)
       this.$set(this, 'documents', findOrders.data)
     }
 
   },
   beforeDestroy() {
-    
+    console.log('===============>>>>>>>>>>>>>>>')
     const {
       Order
     } = this.$foundation.data
@@ -117,16 +121,8 @@ export default {
     onAddDocHandler(eventObj) {
       const {
         error,
-        document,
-        foundation,
         data
       } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
       if (error) {
         return
       }
@@ -134,17 +130,8 @@ export default {
     },
     onEditDocHandler(eventObj) {
       const {
-        error,
-        document,
-        foundation,
         data
       } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
       this.documents.forEach((doc, index) => {
         if (doc.__id === data.__id) {
           this.$set(this.documents, index, data)
@@ -153,17 +140,8 @@ export default {
     },
     onDeleteDocHandler(eventObj) {
       const {
-        error,
-        document,
-        foundation,
         data
       } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
       this.documents.forEach((doc, index) => {
         if (doc.__id === data.__id) {
           this.documents.splice(index, 1)

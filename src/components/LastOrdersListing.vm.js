@@ -22,12 +22,18 @@ export default {
     this.onEditDocHandlerListener = Order.on('edit', this.onEditDocHandler)
     this.onDeleteDocHandlerListener = Order.on('delete', this.onDeleteDocHandler)
 
-    const findOrders = await Order.findAll({})
+    const timeNow = new Date().getTime()
+    let lessSix = timeNow - 0.5 * 60 * 60 * 1000
+    console.log(new Date(lessSix).toISOString())
+    const findOrders = await Order.find({
+      $and: [{ date: { $gte: new Date(lessSix).toISOString() } }]
+    })
+
     if (findOrders.error) {
       return
     }
     if (findOrders.data) {
-      console.log(findOrders.data)
+      // console.log(findOrders.data)
       this.$set(this, 'documents', findOrders.data)
     }
   },
@@ -46,26 +52,15 @@ export default {
         return formatter
     },
     onAddDocHandler (eventObj) {
-      const { error, document, foundation, data } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
+      const { error, data } = eventObj
       if (error) {
         return
       }
       this.documents.unshift(data)
     },
     onEditDocHandler (eventObj) {
-      const { error, document, foundation, data } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
+      const { data } = eventObj
+
       this.documents.forEach((doc, index) => {
         if (doc.__id === data.__id) {
           this.$set(this.documents, index, data)
@@ -73,13 +68,8 @@ export default {
       })
     },
     onDeleteDocHandler (eventObj) {
-      const { error, document, foundation, data } = eventObj
-      console.log({
-        error,
-        document,
-        foundation,
-        data
-      })
+      const { data } = eventObj
+
       this.documents.forEach((doc, index) => {
         if (doc.__id === data.__id) {
           this.documents.splice(index, 1)

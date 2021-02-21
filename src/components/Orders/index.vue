@@ -4,9 +4,9 @@
           <h1 class='h2'>Orders</h1>
           <div class='btn-toolbar mb-2 mb-md-0'>
             <div class='btn-group me-2'>
-                <button type='button' class='btn btn-sm btn-outline-secondary'>
+                <router-link  class="btn btn-sm btn-outline-secondary" to="/Orders/add" tag="button">
                   Add new Order
-                </button>
+                </router-link>
             </div>
           </div>
         </div>
@@ -24,13 +24,13 @@
             </thead>
             <tbody>
                 <tr v-for="doc in this.documents" :key="doc.__id">
-                    <td>{{moment()(doc.date).subtract(6, 'days').calendar()}}</td>
+                    <td>{{moment()(doc.date).calendar()}}</td>
                     <td>{{doc.name}}</td>
                     <td>{{doc.shipTo}}</td>
                     <td>{{doc.paymentMethod}}</td>
                     <td align='right'>USD {{formatter().format(doc.amount)}}</td>
                     <td>
-                        <a color='primary' href='#'>[delete]</a>
+                        <a color='primary' @click="handleDeleteOrder($event, doc.__id)" href='#'>[delete]</a>
                     </td>
                 </tr>
             </tbody>
@@ -122,6 +122,33 @@ export default {
           this.documents.splice(index, 1)
         }
       });
+    },
+    async handleDeleteOrder(e, ___id) {
+      console.log(e, ___id)
+      const { Order } = this.$foundation.data
+      e.preventDefault()
+      // console.error(___id)
+      swal({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const r = await Order.delete(___id)
+          // console.error(r)
+          if (r.error) {
+            swal('Database error', e.error.message, 'error')
+            return
+          }
+          swal('Poof! The order has been deleted!', {
+            icon: 'success'
+          })
+        } else {
+          swal('The Order is safe!')
+        }
+      })
     }
   }
 }

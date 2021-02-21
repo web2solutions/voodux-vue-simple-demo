@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-
 
 
 
@@ -10,6 +8,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // import voodux
 import voodux from 'voodux'
+
+import router from './router'
 
 // import data schemas
 import UserSchema from './data/schemas/User'
@@ -67,7 +67,7 @@ import App from './App.vue'
 
   
 
-  Vue.use(VueRouter)
+  
 
   // let's use BoostrapVue 
   Vue.use(BootstrapVue)
@@ -75,15 +75,8 @@ import App from './App.vue'
   // adds voodux foundation to vue prototype then we can easily use it inside components
   Vue.prototype.$foundation = foundation
 
-  const routes = [
-    { path: '/', component: () => import('./components/Dashboard.vue') },
-    { path: '/Customers', component: () => import('./components/Customers/index.vue') },
-    { path: '/Orders', component: () => import('./components/Orders/index.vue') },
-  ]
 
-  const router = new VueRouter({
-    routes // short for `routes: routes`
-  })
+
   
   new Vue({
     el: '#app',

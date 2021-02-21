@@ -1,5 +1,10 @@
 <template>
-  <canvas class="my-4 w-100" id="myChart" width="900" height="300"></canvas>
+  <div>
+      <h4>Amount earned last 30 minutes</h4>
+      <canvas class="my-4 w-100" id="myChart" width="900" height="300"></canvas>
+  </div>
+
+  
 </template>
 
 

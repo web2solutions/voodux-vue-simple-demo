@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr v-for="doc in this.documents" :key="doc.__id">
-                    <td>{{moment()(doc.date).subtract(6, 'days').calendar()}}</td>
+                    <td>{{moment()(doc.date).calendar()}}</td>
                     <td>{{doc.name}}</td>
                     <td>{{doc.shipTo}}</td>
                     <td>{{doc.paymentMethod}}</td>

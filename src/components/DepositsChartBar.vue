@@ -1,5 +1,8 @@
 <template>
-  <canvas class="my-4 w-100" id="myChartBar" width="900" height="550"></canvas>
+  <div>
+      <h4>Deposits from Customers</h4>
+      <canvas class="my-4 w-100" id="myChartBar" width="900" height="550"></canvas>
+  </div>
 </template>
 
 

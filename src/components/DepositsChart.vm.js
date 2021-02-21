@@ -1,5 +1,5 @@
 /* globals feather, Chart */
-import moment from 'moment'
+import moment from 'moment-timezone'
 
 const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
@@ -17,12 +17,31 @@ export default {
     documents: []
   }),
   watch: {
-    documents: function (d) {
-      const docs = [...d]
-      // // console.log(docs)
+    documents: async function () {
+      const { Order } = this.$foundation.data
+
+      // let docs = [...d]
+      // console.log(docs.slice().map(d => (d.date)))
+      // docs = docs
+      
+
+      const timeNow = new Date().getTime()
+      let lessSix = timeNow - (0.5 * 60 * 60 * 1000)
+      console.log(new Date(lessSix).toISOString())
+      const findOrders = await Order.find({
+        $and: [{ date: { $gte: new Date(lessSix).toISOString() } }]
+      })
+      const data = findOrders.data
       let total = 0
-      const values = docs.reverse().map(doc => (total = total + doc.amount))
-      const labels = docs.reverse().map(doc => (moment(doc.date).format('LTS')))
+      const values = []
+      if (data.length > 0) {
+        data.slice().map(doc => {
+          total = total + doc.amount
+          values.push(total)
+        })
+      }
+      
+      const labels = data.slice().reverse().map(doc => (moment(doc.date).format('LTS')))
       this.$set(this, 'depositsChartValues', values)
       this.$set(this, 'depositsChartLabels', labels)
       this.updateChart({
@@ -41,13 +60,19 @@ export default {
     this.onEditDocHandlerListener = Order.on('edit', this.onEditDocHandler)
     this.onDeleteDocHandlerListener = Order.on('delete', this.onDeleteDocHandler)
 
-    const findOrders = await Order.find({})
+    const timeNow = new Date().getTime()
+    let lessSix = timeNow - (0.5 * 60 * 60 * 1000)
+    console.log(new Date(lessSix).toISOString())
+    const findOrders = await Order.find({
+      $and: [{ date: { $gte: new Date(lessSix).toISOString() } }]
+    })
+
     if (findOrders.error) {
       return
     }
     if (findOrders.data) {
-      // console.log(findOrders.data)
-      this.$set(this, 'documents', findOrders.data.reverse())
+      console.log('findOrders.data', findOrders.data)
+      this.$set(this, 'documents', findOrders.data)
     }
 
   },
@@ -117,8 +142,12 @@ export default {
       if (error) {
         return
       }
-      // this.documents.splice(this.documents.length - 1, 1)
-      this.documents.push(data)
+      
+      if (this.documents.length > 30) {
+        // this.documents.splice(0, 1)
+      }
+      // 
+      this.documents.unshift(data)
     },
     onEditDocHandler (eventObj) {
       const { /* error, document, foundation, */data } = eventObj

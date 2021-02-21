@@ -46,7 +46,7 @@ export default {
         return
       }
       if (findOrders.data) {
-        console.log(findOrders.data)
+        // console.log(findOrders.data)
         this.$set(this, 'total', findOrders.data)
       }
     }

@@ -21,7 +21,7 @@ export default {
     
   }),
   mounted () {
-    console.log(this.$foundation)
+    // console.log(this.$foundation)
   },
   beforeDestroy () {
     

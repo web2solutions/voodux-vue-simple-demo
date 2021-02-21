@@ -1,5 +1,6 @@
 // import voodux
 import voodux from 'voodux'
+import moment from 'moment-timezone'
 
 const schema = new voodux.Foundation.Schema({
   name: {
@@ -25,7 +26,9 @@ const schema = new voodux.Foundation.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: function () {
+      return moment()
+    },
     index: true
   }
 })

@@ -1,13 +1,17 @@
 <template>
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div
-      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 bcustomer-bottom"
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 bproduct-bottom"
     >
-      <h1 class="h2">Customers</h1>
+      <h1 class="h2">Products</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-          <router-link  class="btn btn-sm btn-outline-secondary" to="/Customers/add" tag="button">
-             Add new Customer
+          <router-link
+            class="btn btn-sm btn-outline-secondary"
+            to="/Products/add"
+            tag="button"
+          >
+            Add new Product
           </router-link>
         </div>
       </div>
@@ -17,21 +21,27 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>E-mail</th>
-            <th>Address</th>
-            <th  align="right">Cards</th>
+            <th>Vendor</th>
+            <th align="right">Price</th>
             <th>-</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="doc in this.documents" :key="doc.__id">
             <td>{{ doc.name }}</td>
-            <td>{{ doc.email }}</td>
-            <td>{{ doc.address }}</td>
-            <td>{{ doc.cards }}</td>
+            <td>{{ doc.vendor }}</td>
+            <td>USD {{ formatter().format(doc.price_cost) }}</td>
             <td>
-              <router-link  class="primary" :to="`/Customers/edit/${doc.__id}`">[edit]</router-link>
-               | <a color='primary' @click="handleDeleteCustomer($event, doc.__id)" href='#'>[delete]</a>
+              <router-link class="primary" :to="`/Products/edit/${doc.__id}`"
+                >[edit]</router-link
+              >
+              |
+              <a
+                color="primary"
+                @click="handleDeleteProduct($event, doc.__id)"
+                href="#"
+                >[delete]</a
+              >
             </td>
           </tr>
         </tbody>
@@ -52,37 +62,37 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 
 export default {
-  name: 'Customers',
+  name: 'Products',
   components: {},
   props: {},
   data: () => ({
     documents: []
   }),
   async mounted () {
-    const { Customer } = this.$foundation.data
+    const { Product } = this.$foundation.data
 
-    this.onAddDocHandlerListener = Customer.on('add', this.onAddDocHandler)
-    this.onEditDocHandlerListener = Customer.on('edit', this.onEditDocHandler)
-    this.onDeleteDocHandlerListener = Customer.on(
+    this.onAddDocHandlerListener = Product.on('add', this.onAddDocHandler)
+    this.onEditDocHandlerListener = Product.on('edit', this.onEditDocHandler)
+    this.onDeleteDocHandlerListener = Product.on(
       'delete',
       this.onDeleteDocHandler
     )
 
-    const findCustomers = await Customer.find({})
-    if (findCustomers.error) {
+    const findProducts = await Product.find({})
+    if (findProducts.error) {
       return
     }
-    if (findCustomers.data) {
-      console.log(findCustomers.data)
-      this.$set(this, 'documents', findCustomers.data)
+    if (findProducts.data) {
+      console.log(findProducts.data)
+      this.$set(this, 'documents', findProducts.data)
     }
   },
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   beforeDestroy () {
-    const { Customer } = this.$foundation.data
-    Customer.stopListenTo(this.onAddDocHandlerListener)
-    Customer.stopListenTo(this.onEditDocHandlerListener)
-    Customer.stopListenTo(this.onDeleteDocHandlerListener)
+    const { Product } = this.$foundation.data
+    Product.stopListenTo(this.onAddDocHandlerListener)
+    Product.stopListenTo(this.onEditDocHandlerListener)
+    Product.stopListenTo(this.onDeleteDocHandlerListener)
   },
   methods: {
     moment () {
@@ -120,9 +130,9 @@ export default {
         }
       })
     },
-    async handleDeleteCustomer(e, ___id) {
+    async handleDeleteProduct (e, ___id) {
       console.log(e, ___id)
-      const { Customer } = this.$foundation.data
+      const { Product } = this.$foundation.data
       e.preventDefault()
       // console.error(___id)
       swal({
@@ -131,9 +141,9 @@ export default {
         icon: 'warning',
         buttons: true,
         dangerMode: true
-      }).then(async (willDelete) => {
+      }).then(async willDelete => {
         if (willDelete) {
-          const r = await Customer.delete(___id)
+          const r = await Product.delete(___id)
           // console.error(r)
           if (r.error) {
             swal('Database error', e.error.message, 'error')
@@ -143,7 +153,7 @@ export default {
             icon: 'success'
           })
         } else {
-          swal('The Customer is safe!')
+          swal('The Product is safe!')
         }
       })
     }
