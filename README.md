@@ -16,7 +16,7 @@ It uses [Bootstrap4](https://getbootstrap.com/docs/4.0/getting-started/introduct
 
 [Check the online demo](https://voodux-vue-simple-demo.vercel.app/)
 
-[Check the documentation for this demo](https://web2solutions.github.io/voodux-vue-simple-demo/)
+Check the documentation for this demo - TODO
 
 
 <img src="https://i.imgur.com/dSSh7xq.png" width="600" />
